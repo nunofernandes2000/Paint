@@ -1,6 +1,3 @@
-// Circunfer�ncia - 1� ponto � o centro e o 2� ponto � o raio
-// Cuidado com os estados!! Por exemplo quando estou a criar uma figura e fa�o o primeiro click, e se mudar para criar um tri�ngulo
-
 #include "form.h"
 #include "DBForms.h"
 #include <stdlib.h>

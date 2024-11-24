@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/nunofernandes/Desktop/Projeto1/cmake-build-debug"
+			"value" : "/Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -154,7 +154,7 @@
 					"value" : "C compiler"
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "/Library/Developer/CommandLineTools/usr/bin/cc"
 		},
 		{
@@ -383,7 +383,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nunofernandes/Desktop/Projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -395,7 +395,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "Unix Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -443,7 +443,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/nunofernandes/Desktop/Projeto1"
+			"value" : "/Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -494,12 +494,16 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Path to a program."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja"
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/make"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1119,7 +1123,7 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "Include for OpenGL on OS X"
+					"value" : "Include for OpenGL"
 				}
 			],
 			"type" : "PATH",
@@ -1135,7 +1139,7 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "OpenGL library for OS X"
+					"value" : "OpenGL GL library"
 				}
 			],
 			"type" : "FILEPATH",
@@ -1151,7 +1155,7 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "GLU library for OS X (usually same as OpenGL library)"
+					"value" : "OpenGL GLU library"
 				}
 			],
 			"type" : "FILEPATH",
@@ -1547,7 +1551,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nunofernandes/Desktop/Projeto1/cmake-build-debug"
+			"value" : "/Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "Projeto1_IS_TOP_LEVEL",
@@ -1571,7 +1575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/nunofernandes/Desktop/Projeto1"
+			"value" : "/Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1"
 		},
 		{
 			"name" : "__pkg_config_checked_PC_GLUT",
