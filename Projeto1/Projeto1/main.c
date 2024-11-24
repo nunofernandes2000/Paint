@@ -113,13 +113,18 @@ void mymouseTools(GLint button, GLint state, GLint x, GLint y) {
             if (pick(paletteFigures[i], x, y)) {
                 type = getFormType(paletteFigures[i]); // Atualizar o tipo de forma selecionado
                 // Recriar activeColor com o novo tipo de forma
-                activeColor = newForm(type, 10, windowY - 60, 50, 50); //mudei para -60 para ajustar a altura
+                if (type == RECTANGLE) {
+                    activeColor = newForm(type, 10, windowY - 60, 50, 25); // mudei a altura para metade da largura
+                } else {
+                    activeColor = newForm(type, 10, windowY - 60, 50, 50); //mudei para -60 para ajustar a altura
+                }
                 setBackgroundColor(activeColor, rState, gState, bState);
                 setLineColor(activeColor, lrState, lgState, lbState);
                 glutPostRedisplay();
                 return;
             }
         }
+
 
         for (i = 0; i < nPaletteStates; i++) {
             if (pick(paletteState[i], x, y)) {
@@ -663,7 +668,7 @@ void initPaletteFigures() {
     int size = 50; // Tamanho das figuras, igual ao activeColor
 
     // Retângulo
-    paletteFigures[0] = newForm(RECTANGLE, startX, startY, size, size);
+    paletteFigures[0] = newForm(RECTANGLE, startX, startY, size, size/2);
     setBackgroundColor(paletteFigures[0], 1.0, 1.0, 1.0);
     setLineColor(paletteFigures[0], 0.0, 0.0, 0.0);
 
