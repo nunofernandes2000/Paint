@@ -7,104 +7,104 @@ Form* a;
 int n;
 
 void initDBForms(int num) {
-	int i;
+    int i;
 
-	n = num;
+    n = num;
 
-	a = malloc(sizeof(Form) * n);
+    a = malloc(sizeof(Form) * n);
 
-	// initialize array of forms (pointers to forms) to NULL
-	for (i = 0; i < n; i++)
-		a[i] = NULL;
+    // initialize array of forms (pointers to forms) to NULL
+    for (i = 0; i < n; i++)
+        a[i] = NULL;
 }
 
 void populateDBForms(int maxSize) {
-	int i;
+    int i;
 
-	for (i = 0; i < n; i++)
-		if (a[i] == NULL) {
-			a[i] = createRandomForm(maxSize);
-			setBackgroundColor(a[i], rand() / (RAND_MAX * 1.0), rand() / (RAND_MAX * 1.0), rand() / (RAND_MAX * 1.0));
-		}
+    for (i = 0; i < n; i++)
+        if (a[i] == NULL) {
+            a[i] = createRandomForm(maxSize);
+            setBackgroundColor(a[i], rand() / (RAND_MAX * 1.0), rand() / (RAND_MAX * 1.0), rand() / (RAND_MAX * 1.0));
+        }
 
 
 }
 
 int insertBDForm(Form f) {
-	int i;
+    int i;
 
-	for (i = 0; i < n; i++)
-		if (a[i] == NULL) {
-			a[i] = f;
-			return 1;
-		}
+    for (i = 0; i < n; i++)
+        if (a[i] == NULL) {
+            a[i] = f;
+            return 1;
+        }
 
-	return 0;
+    return 0;
 }
 
 void deleteRandomDBForm() {
-	int i = rand() % n;
-	if (a[i] != NULL) {
-		deleteForm(a[i]);
-		a[i] = NULL;
-	}
+    int i = rand() % n;
+    if (a[i] != NULL) {
+        deleteForm(a[i]);
+        a[i] = NULL;
+    }
 }
 
 // Quando apagar uma forma quero "puxar" as outras para a esquerda
 int deleteFormDB(Form f) {
-	int i;
+    int i;
 
-	// Se o array estiver cheio e tentar apagar uma figura que não está, este vai apagar a última figura
-	// Assim, tenho que verificar se encontrei a figura
-	int formDeleted = 0;
+    // Se o array estiver cheio e tentar apagar uma figura que nï¿½o estï¿½, este vai apagar a ï¿½ltima figura
+    // Assim, tenho que verificar se encontrei a figura
+    int formDeleted = 0;
 
-	for (i = 0; i < n && a[i] != NULL; ++i) {
-		if (a[i] == f) {           // Encontra a posição onde a figura está
-			deleteForm(a[i]);      // Libera a memória da figura
-			formDeleted = 1;
-			break;
-		}
-	}
-	// Encontrou a forma e apagou-a
+    for (i = 0; i < n && a[i] != NULL; ++i) {
+        if (a[i] == f) {           // Encontra a posiï¿½ï¿½o onde a figura estï¿½
+            deleteForm(a[i]);      // Libera a memï¿½ria da figura
+            formDeleted = 1;
+            break;
+        }
+    }
+    // Encontrou a forma e apagou-a
 
-	if (formDeleted) {
-		// A próxima forma vai começar na posição seguinte até ao final do array ou até encontrar uma posição vazia
-		for (i = i + 1; i < n && a[i] != NULL; ++i) {
-			a[i - 1] = a[i];
-		}
-		// Como a última forma foi copiada para a posição anterior, vou colocar a última a NULL
-		a[i - 1] = NULL;
-	}
+    if (formDeleted) {
+        // A prï¿½xima forma vai comeï¿½ar na posiï¿½ï¿½o seguinte atï¿½ ao final do array ou atï¿½ encontrar uma posiï¿½ï¿½o vazia
+        for (i = i + 1; i < n && a[i] != NULL; ++i) {
+            a[i - 1] = a[i];
+        }
+        // Como a ï¿½ltima forma foi copiada para a posiï¿½ï¿½o anterior, vou colocar a ï¿½ltima a NULL
+        a[i - 1] = NULL;
+    }
 
-	// Assim consigo ver se a forma foi efetivamente apagada
-	return formDeleted;
+    // Assim consigo ver se a forma foi efetivamente apagada
+    return formDeleted;
 }
 
 
 
 void drawDBForms() {
-	int i;
-	for (i = 0; i < n; i++)
-		if (a[i] != NULL)
-			drawForm(a[i]);
+    int i;
+    for (i = 0; i < n; i++)
+        if (a[i] != NULL)
+            drawForm(a[i]);
 }
 
 void printDBForms() {
-	int i;
+    int i;
 
-	// print the content of the array
-	for (i = 0; i < n; i++)
-		if (a[i] != NULL)
-			printfForm(a[i]);
+    // print the content of the array
+    for (i = 0; i < n; i++)
+        if (a[i] != NULL)
+            printfForm(a[i]);
 }
 
 Form pickDBForm(float x, float y) {
-	int i;
+    int i;
 
-	for (i = n - 1; i >= 0; i--)
-		if (a[i] != NULL && pick(a[i], x, y)) {
-			return a[i];
-		}
+    for (i = n - 1; i >= 0; i--)
+        if (a[i] != NULL && pick(a[i], x, y)) {
+            return a[i];
+        }
 
-	return NULL;
+    return NULL;
 }

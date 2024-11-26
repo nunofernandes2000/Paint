@@ -1,8 +1,39 @@
+/*
+Nuno Fernandes nº21635
+Rafael Carvalho nº21986
+
+Funcionamento do Paint
+
+Atalhos do teclado:
+Q e q --> faz exit do programa
+R e r --> type = RECTANGLE
+T e t --> type = TRIANGLE_ISO
+S e s --> type = SQUARE
+L e l --> type = LINE
+E e "e" --> type = TRIANGLE_EQUI
+H e h --> type = HEXAGON
+C e c --> type = CIRCUMFERENCE
+1,2,3,4,5,6 --> aumenta e diminui as cores
+I e i -->  currentState = INSERT
+D e d --> currentState = DELETE
+M e m --> currentState = MOVE
+P e p --> currentState = EDIT
+Z e z --> currentState = RESIZE
+
+Barra de ferramentas:
+O primeiro estado é o Inserir (cruz no meio)
+O segundo é o Apagar (X)
+O terceiro é o Mover (manter pressionado o botão esquerdo e mover)
+O quarto é o Editar ou Pintar (Muda a cor do background ou das linhas da figura)
+O quinto é o Resize, ou seja, é o que ajusta o tamanho da figura (manter pressionado o botão esquerdo e arrastar)
+
+*/
+
 #include "form.h"
 #include "DBForms.h"
 #include <stdlib.h>
-#include <time.h>
 #include <GL/glut.h>
+//#include <time.h>
 #include "stdio.h"
 
 int counter = 0;
@@ -29,6 +60,7 @@ float lgState = 0.0;
 float lbState = 0.0;
 float deltaColor = 0.1; // Update do RGB
 
+
 int creatingForm = 0;
 
 Form selectedForm = NULL;
@@ -54,17 +86,6 @@ Form* paletteState;
 int nPaletteStates;
 
 
-void insertRandomForm(int x, int y) {
-    Form f = createFormC(type, x, y, windowX);
-    setBackgroundColor(f, rState, gState, bState);
-    if (!insertBDForm(f)) {
-        printf("MEMORY FULL!!!\n");
-        deleteForm(f);
-    }
-    else
-        glutPostRedisplay();
-}
-
 void deleteSomeForm(int x, int y) {
     Form f = pickDBForm(x, y);
     if (f != NULL) {
@@ -85,7 +106,7 @@ void mymouseTools(GLint button, GLint state, GLint x, GLint y) {
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-        // Verificar paleta de cores (código existente)
+        // Verificar paleta de cores
         for (i = 0; i < nPaletteColors; i++) {
             if (pick(palette[i], x, y)) {
                 getBGColor(palette[i], color);
@@ -166,30 +187,30 @@ void insertState(GLint button, GLint state, GLint x, GLint y) {
             else { // primeiro clique
                 if (x >= 0 && x <= windowX && y >= 0 && y <= windowY - drawArea) {
                     switch (type) {
-                    case RECTANGLE:
-                        selectedForm = newRectangle2Point(x, y, x, y);
-                        break;
-                    case SQUARE:
-                        selectedForm = newSquare(x, y, 0);
-                        break;
-                    case TRIANGLE_ISO:
-                        selectedForm = newTriangleIso(x, y, 0, 0);
-                        break;
-                    case LINE:
-                        selectedForm = newLine(x, y, 0, 0);
-                        break;
-                    case TRIANGLE_EQUI:
-                        selectedForm = newTriangleEqui(x, y, 0, 0);
-                        break;
-                    case HEXAGON:
-                        selectedForm = newHexagon(x, y, 0, 0);
-                        break;
-                    case CIRCUMFERENCE:
-                        selectedForm = newCircumference(x, y, 0, 0);
-                        break;
-                    default:
-                        printf("Unknown form type!\n");
-                        return;
+                        case RECTANGLE:
+                            selectedForm = newRectangle2Point(x, y, x, y);
+                            break;
+                        case SQUARE:
+                            selectedForm = newSquare(x, y, 0);
+                            break;
+                        case TRIANGLE_ISO:
+                            selectedForm = newTriangleIso(x, y, 0, 0);
+                            break;
+                        case LINE:
+                            selectedForm = newLine(x, y, 0, 0);
+                            break;
+                        case TRIANGLE_EQUI:
+                            selectedForm = newTriangleEqui(x, y, 0, 0);
+                            break;
+                        case HEXAGON:
+                            selectedForm = newHexagon(x, y, 0, 0);
+                            break;
+                        case CIRCUMFERENCE:
+                            selectedForm = newCircumference(x, y, 0, 0);
+                            break;
+                        default:
+                            printf("Unknown form type!\n");
+                            return;
                     }
 
                     if (selectedForm != NULL) {
@@ -291,7 +312,7 @@ void resizeState(GLint button, GLint state, GLint x, GLint y) {
     }
 }
 
-//Agora o mymouseCanvas tem um switch para os diferentes tipos de formas que podem ser criadas com dois cliques
+
 void mymouseCanvas(GLint button, GLint state, GLint x, GLint y) {
     if (y > windowY - drawArea) {
         return; // Não permitir desenho na área da paleta
@@ -306,11 +327,11 @@ void mymouseCanvas(GLint button, GLint state, GLint x, GLint y) {
 
 
 void mymouse(GLint button, GLint state, GLint x, GLint y) {
-    //printf("Clik in a mouse button... Window (X,Y) = (%i,%i)\n", x, y);
+
 
     y = windowY - y;
 
-    //printf("World (X, Y) = (% i, % i)\n", x, y);
+
     if (y > windowY - drawArea) {
         mymouseTools(button, state, x, y);
     }
@@ -319,6 +340,8 @@ void mymouse(GLint button, GLint state, GLint x, GLint y) {
 
 }
 
+
+//Atalhos do teclado
 void mykey(unsigned char key, int x, int y) {
     y = windowY - y;
 
@@ -400,13 +423,29 @@ void mykey(unsigned char key, int x, int y) {
 
         case 'i':
         case 'I':
-            insertRandomForm(x, y);
+            currentState = INSERT;
             break;
 
         case 'd':
         case 'D':
-            deleteSomeForm(x, y);
+            currentState = DELETE;
             break;
+
+        case 'm':
+        case 'M':
+            currentState = MOVE;
+            break;
+
+        case 'p':
+        case 'P':
+            currentState = EDIT;
+            break;
+
+        case 'z':
+        case 'Z':
+            currentState = RESIZE;
+            break;
+
     }
     setBackgroundColor(activeColor, rState, gState, bState);
     glutPostRedisplay();
@@ -547,6 +586,15 @@ void drawStates() {
             } else {
                 glColor3f(0.0, 0.0, 0.0); // Cor preta para o ícone de redimensionamento quando não selecionado
             }
+            Form s4 = newForm(SQUARE, 1100, windowY - 40, 15, 15);
+            setBackgroundColor(s4, 1.0, 1.0, 1.0);
+            setLineColor(s4, 0.0, 0.0, 0.0);
+            drawForm(s4);
+
+            Form s5 = newForm(SQUARE, 1110, windowY - 50, 20, 20);
+            setBackgroundColor(s5, 0.0, 0.0, 0.0);
+            setLineColor(s5, 0.0, 0.0, 0.0);
+            drawForm(s5);
         }
     }
 }
@@ -559,7 +607,7 @@ void mydisplay() {
     // Desenhar as linhas divisórias
     drawDividingLines();
 
-    // for refence draw X and Y axes
+
     glBegin(GL_LINES);
     glVertex2f(-4.0, 0.0);
     glVertex2f(4.0, 0.0);
@@ -590,6 +638,7 @@ void mydisplay() {
     printf("Counter: %i\n", ++counter);
 }
 
+//Inicialização da paleta de cores
 void initPaletteColors() {
     nPaletteColors = 10;
     palette = malloc(sizeof(Form) * nPaletteColors);
@@ -624,6 +673,7 @@ void initPaletteColors() {
     setBackgroundColor(palette[9], 0.0, 0.0, 0.0); // black
 }
 
+//Inicialização da paleta das linhas
 void initPaletteLines() {
     paletteLine = malloc(sizeof(Form) * nPaletteColors);
     paletteLine[0] = newSquare(240, windowY - 30, 20);
@@ -658,6 +708,8 @@ void initPaletteLines() {
 
 }
 
+
+//Inicialização da paleta de figuras
 void initPaletteFigures() {
     nPaletteFigures = 7; // Número de figuras
     paletteFigures = malloc(sizeof(Form) * nPaletteFigures);
@@ -703,6 +755,8 @@ void initPaletteFigures() {
     setLineColor(paletteFigures[6], 0.0, 0.0, 0.0);
 }
 
+
+//Inicialização da paleta de estados
 void initPaletteStates() {
     nPaletteStates = 5;
     paletteState = malloc(sizeof(Form) * nPaletteStates);
@@ -712,16 +766,16 @@ void initPaletteStates() {
 
     paletteState[1] = newSquare(910, windowY - 30, 50);
 
-
     paletteState[2] = newSquare(970, windowY - 30, 50);
 
     paletteState[3] = newSquare(1030, windowY - 30, 50);
 
     paletteState[4] = newSquare(1090, windowY - 30, 50); // Novo estado de redimensionamento
 
-
 }
 
+
+// Inicializar a cor ativa
 void initActiveColor() {
     activeColor = newForm(type, 10, windowY - 20, 50, 50);
     setBackgroundColor(activeColor, rState, gState, bState);
@@ -733,7 +787,7 @@ void initActiveColor() {
 void init() {
     int i;
 
-    srand(time(NULL));
+    //srand(time(NULL));
 
     initDBForms(20);
     //populateDBForms(windowX);
@@ -792,7 +846,6 @@ void myshape(int w, int h) {
     for (int i = 0; i < nPaletteStates; i++) {
         updateFormY(paletteState[i], windowY - 60);
     }
-
 
     glViewport(0, 0, windowX, windowY);
     glMatrixMode(GL_PROJECTION);

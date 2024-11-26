@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1 -B /Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1 -B /Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug
 -- The C compiler identification is AppleClang 16.0.0.16000026
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -7,6 +7,6 @@
 -- Detecting C compile features - done
 -- Found OpenGL: /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/System/Library/Frameworks/OpenGL.framework
 -- Found GLUT: /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/System/Library/Frameworks/GLUT.framework
--- Configuring done (0.9s)
+-- Configuring done (0.8s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/nunofernandes/Desktop/ComputacaoGrafica/Projeto1/cmake-build-debug

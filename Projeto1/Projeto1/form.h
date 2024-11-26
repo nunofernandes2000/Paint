@@ -8,6 +8,7 @@
 #define TRIANGLE_EQUI 4
 #define HEXAGON 5
 #define CIRCUMFERENCE 6
+#define STAR 7
 
 /*
 *  This interface provides clients with handles to form objects,
@@ -28,18 +29,9 @@ Form newTriangleEqui(float x, float y, float xSide, float ySize);
 Form newHexagon(float x, float y, float xSide, float ySize);
 Form newCircumference(float x, float y, float xSide, float ySize);
 
-Form newRectangleC(float x, float y, float xSize, float ySize);
-Form newSquareC(float x, float y, float side);
-Form newTriangleIsoC(float x, float y, float xSize, float ySize);
-Form newLineC(float x, float y, float xSize, float ySize);
-Form newTriangleEquiC(float x, float y, float xSize, float ySize);
-
 Form newRectangle2Point(float xi, float yi, float xf, float yf);
 
 Form createRandomForm(int maxSize);
-Form createForm(int x, int y, int maxSize);
-Form createForm2(int type, int x, int y, int maxSize);
-Form createFormC(int type, int x, int y, int maxSize);
 
 // check if XY is inside form
 int pick(Form f, float x, float y);
@@ -64,11 +56,8 @@ void printfForm(Form f);
 void drawForm(Form f);
 void updateFormY(Form f, float y);
 
-
+// apanha o tipo da forma
 int getFormType(Form f);
-
-
-
 
 #endif
 

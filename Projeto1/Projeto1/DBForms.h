@@ -11,7 +11,7 @@ void drawDBForms();
 void printDBForms();
 int deleteFormDB(Form f);
 
-// funÁ„o para ver se est· alguma forma dentro do XY e retorna
+//fun√ß√£o para ver se est√° alguma forma dentro do XY e retorna
 Form pickDBForm(float x, float y);
 
 #endif
